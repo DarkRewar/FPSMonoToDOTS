@@ -17,12 +17,6 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public PlayerController Target;
 
-    [GetComponent]
-    protected Rigidbody _rigidbody;
-
-    [GetComponent]
-    protected Collider _collider;
-
     private bool _isDead = false;
 
     private static int _moveSpeedToHash = Animator.StringToHash("MoveSpeed");
@@ -30,24 +24,6 @@ public class EnemyController : MonoBehaviour, IDamageable
     private static int _deathToHash = Animator.StringToHash("Death");
 
     private void Awake() => Injector.Process(this);
-
-    private void Update()
-    {
-        return;
-        if (_isDead || !Target) return;
-
-        var lookPos = Target.transform.position;
-        lookPos.y = 0;
-        transform.LookAt(lookPos, Vector3.up);
-
-        if (Vector3.Distance(lookPos, transform.position) > _attackRange)
-        {
-            _rigidbody.linearVelocity = _moveSpeed * (lookPos - transform.position).LimitLength();
-            _animator.SetFloat(_moveSpeedToHash, (_rigidbody.linearVelocity.LimitLength() / 3).magnitude);
-        }
-        else
-            Attack();
-    }
 
     private void Attack()
     {
@@ -67,8 +43,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (_lifePoints < 0)
         {
             _isDead = true;
-            _collider.enabled = false;
-            _rigidbody.isKinematic = true;
             _animator.SetBool(_deathToHash, true);
             Destroy(gameObject, 5);
         }

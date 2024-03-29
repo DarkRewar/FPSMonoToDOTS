@@ -1,4 +1,3 @@
-using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
@@ -10,7 +9,6 @@ public partial struct EnemySpawnSystem : ISystem
     public static int EnemyCount;
     private bool _isInitialized;
 
-    [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
         EnemyCount = 0;

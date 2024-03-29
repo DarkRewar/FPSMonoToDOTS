@@ -9,6 +9,13 @@ player must kill a large amount of enemies. But the game is not the goal
 of this repo, it exists to try DOTS and how "easy" it is to get an equivalent
 to Mono.
 
+## Requirements
+
+Both Unity projects were made using Unity 6 (6000.0.0b13).
+I recommend this version to avoid bad retro-compatibility.
+
+For the DOTS project, verify that `Jobs > Burst > Enable Compilation` option is checked.
+
 ## How to use
 
 Both folders are an entire Unity project. Clone the repo and open the folder
